@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import scipy.stats as st
 from rich.progress import track
 
-# The code aims to plot all pair correlation in all subfolders (each represent a dataset to be pooled)
+# The code aims to pool all distribution and normalization factors in all subfolders (each represent a dataset to be pooled), and calculate pair correlation by summing up all counts on each bin and devide by the sum of normalization factors on the bin.
 
 path = "/Users/GGM/Documents/Graduate_Work/Nils_Walter_Lab/From_AnalysisSSD/Analysis-20220507-PairCorr/"
 

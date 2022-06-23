@@ -4,18 +4,17 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.stats as st
-from rich.progress import track
 
 # The code aims to compare two sets of data, it first pooling all data from each folder, then plot them together
 
 ######################################
 # path and label
-folder1 = "/Users/GGM/Documents/Graduate_Work/Nils_Walter_Lab/From_AnalysisSSD/Analysis-20220507-PairCorr/THOR_1x"
-label1 = "THOR, 150 mM Na+"
-folder2 = "/Users/GGM/Documents/Graduate_Work/Nils_Walter_Lab/From_AnalysisSSD/Analysis-20220507-PairCorr/THOR_2x"
-label2 = "THOR, 300 mM Na+"
+folder1 = "/Users/GGM/Documents/Graduate_Work/Nils_Walter_Lab/From_AnalysisSSD/Analysis-20220507-PairCorr/THOR_2x"
+label1 = "THOR, 300 mM Na+"
+folder2 = "/Users/GGM/Documents/Graduate_Work/Nils_Walter_Lab/From_AnalysisSSD/Analysis-20220507-PairCorr/L941_2x"
+label2 = "L941, 300 mM Na+"
 
-fname_save = "Cross PairCorr-Compare-THOR.png"
+fname_save = "Cross PairCorr-Compare-THORvsL941-2x.png"
 
 r_max_nm = 5000
 dr_nm = 200
@@ -25,7 +24,7 @@ array_bin = np.arange(0, r_max_nm, dr_nm)
 # pooling datasets
 lst_files = [f for f in os.listdir(folder1) if f.endswith("PairCorr.csv")]
 lst_array = []
-for file in track(lst_files, description=folder1):
+for file in lst_files:
     df = pd.read_csv(join(folder1, file)).drop(columns=["roi"])
     df[df == 0] = np.nan
     lst_array.append(df.to_numpy())
@@ -36,7 +35,7 @@ sem1 = st.sem(df.to_numpy(), axis=0, nan_policy="omit")
 
 lst_files = [f for f in os.listdir(folder2) if f.endswith("PairCorr.csv")]
 lst_array = []
-for file in track(lst_files, description=folder1):
+for file in lst_files:
     df = pd.read_csv(join(folder2, file)).drop(columns=["roi"])
     df[df == 0] = np.nan
     lst_array.append(df.to_numpy())
