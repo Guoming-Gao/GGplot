@@ -5,19 +5,14 @@ import matplotlib.pyplot as plt
 from skimage import exposure
 import numpy as np
 import cv2
+import pickle
 
-path_mask = "/Volumes/AnalysisGG/PROCESSED_DATA/2022July-RNAinFUS-preliminary/20220712_FLmRNA_10FUS_1Mg_10Dex_noTotR_24C/high_freq_50Hz_both_on_FOV-5-condensate_AveProj_mask.tif"
-path_img = "/Volumes/AnalysisGG/PROCESSED_DATA/2022July-RNAinFUS-preliminary/20220712_FLmRNA_10FUS_1Mg_10Dex_noTotR_24C/high_freq_50Hz_both_on_FOV-5-condensate_AveProj.tif"
+path_contours = "/Volumes/AnalysisGG/PROCESSED_DATA/2022July-RNAinFUS-preliminary/20220712_FLmRNA_10FUS_1Mg_10Dex_noTotR_24C/high_freq_50Hz_both_on_FOV-5-condensate_contours.pkl"
 
-mask = imread(path_mask)
-_, edges = cv2.threshold(mask, 1, 2, 0)
-contours, _ = cv2.findContours(edges, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_NONE)
-# print("Total Number of Contours Found: ", str(len(contours)))
-
+contours, img = pickle.load(open(fname, "rb"))
 
 plt.figure()
 # Contrast stretching
-img = imread(path_img)
 p1, p2 = np.percentile(img, (0.05, 99))
 img_rescale = exposure.rescale_intensity(img, in_range=(p1, p2))
 plt.imshow(img_rescale, cmap="gray")
