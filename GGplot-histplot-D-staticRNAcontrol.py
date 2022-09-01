@@ -29,7 +29,13 @@ for label, start in zip(labels, fname_starts):
         lst_log10D.extend(list(df_R2above["log10D"]))
         lst_dataclass.extend(list(np.repeat(label, df_R2above.shape[0])))
 
-df_plot = pd.DataFrame({"log10D": lst_log10D, "Exposure Time": lst_dataclass},)
+df_plot = pd.DataFrame({"log10D": lst_log10D, "dataclass": lst_dataclass},)
+# Count number of molecules and put in label
+final_labels = []
+for label in labels:
+    N = df_plot[df_plot["dataclass"] == label].shape[0]
+    final_labels.extend(list(np.repeat(label + ", N=" + str(N), N)))
+df_plot["Exposure Time"] = final_labels
 df_plot = df_plot.astype(dtype={"log10D": "float64", "Exposure Time": "string"})
 
 plt.figure(figsize=(9, 4), dpi=200)
@@ -43,9 +49,9 @@ sns.histplot(
 # Theoretical Thresholds
 lst_exptime = [2, 0.1, 0.04, 0.02]
 for exptime, idx in zip(lst_exptime, range(4)):
-    bound = np.log10((0.050 ** 2) / (4 * exptime))
+    bound = np.log10((0.055 ** 2) / (4 * exptime))
     plt.axvline(x=bound, color=sns.color_palette()[idx], ls="--")
-plt.title("D lower bounds by imaging frequency")
-plt.xlabel("log10D ($\mu$m^2/s)")
+plt.title("D Lower Bounds by Imaging Frequency", weight="bold")
+plt.xlabel("log10D ($\mu$m^2/s)", weight="bold")
 plt.tight_layout()
 plt.savefig("D lower bounds by imaging frequency.png", format="png")
