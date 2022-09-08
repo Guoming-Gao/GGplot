@@ -49,7 +49,7 @@ sns.histplot(
 # Theoretical Thresholds
 lst_exptime = [2, 0.1, 0.04, 0.02]
 for exptime, idx in zip(lst_exptime, range(4)):
-    bound = np.log10((0.055 ** 2) / (4 * exptime))
+    bound = np.log10((0.016 ** 2) / (4 * exptime))
     plt.axvline(x=bound, color=sns.color_palette()[idx], ls="--")
 plt.title("D Lower Bounds by Imaging Frequency", weight="bold")
 plt.xlabel("log10D ($\mu$m^2/s)", weight="bold")
