@@ -9,7 +9,7 @@ from scipy.optimize import curve_fit
 
 sns.set(color_codes=True, style="white")
 
-folderpath = "/Volumes/AnalysisGG/PROCESSED_DATA/2022July-RNAinFUS-preliminary/20220712_FLmRNA_10FUS_1Mg_10Dex_noTotR_24C/"
+folderpath = "/Volumes/AnalysisGG/PROCESSED_DATA/RNA-diffusion-in-FUS/20220712_FLmRNA_10FUS_1Mg_10Dex_noTotR_24C/"
 os.chdir(folderpath)
 lst_fname = [f for f in os.listdir(folderpath) if f.endswith("RNA_linregress_D.csv")]
 R2threshold = 0.9
@@ -55,7 +55,7 @@ g = sns.histplot(
     x="log10D (um^2/s)",
     hue="Frequency",
     fill=True,
-    stat="count",
+    stat="Proba",
     alpha=0.7,
     common_norm=True,
     bins=30,
