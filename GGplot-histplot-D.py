@@ -23,9 +23,9 @@ lst_files = list(fd.askopenfilenames())
 
 
 def Gauss_fit_plot_text(data, range, color, text_x, text_y):
-    try:
-        counts, bins = np.histogram(data, bins=30, range=range)
-    except:
+    if range == None:
+        counts, bins = np.histogram(data, bins=30)
+    else:
         counts, bins = np.histogram(data, bins=30)
 
     def Gauss(x, A, x0, sigma):
