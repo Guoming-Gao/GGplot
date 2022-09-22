@@ -11,9 +11,6 @@ sns.set(color_codes=True, style="white")
 print("Type in the title:")
 title = input()
 
-print("Do you want to set range by detection limits? (Y/N)")
-set_range = input() == "Y"
-
 if set_range:
     print("Type in the time between frames (seconds):")
     t_between_frames = float(input())
@@ -23,10 +20,7 @@ lst_files = list(fd.askopenfilenames())
 
 
 def Gauss_fit_plot_text(data, range, color, text_x, text_y):
-    if range == None:
-        counts, bins = np.histogram(data, bins=30)
-    else:
-        counts, bins = np.histogram(data, bins=30)
+    counts, bins = np.histogram(data, bins=30, range=range)
 
     def Gauss(x, A, x0, sigma):
         return A * np.exp((-1 / 2) * ((x - x0) ** 2 / sigma ** 2))
@@ -65,42 +59,31 @@ df_plot = pd.DataFrame({"log10D (um^2/s)": lst_log10D,}, dtype=float)
 ######################################
 # Total D distribution with fitting
 plt.figure(figsize=(9, 4), dpi=200)
-if set_range:
-    static_err = 0.016
-    um_per_pxl = 0.117
-    link_max = 3
-    log10D_low = np.log10(static_err ** 2 / (4 * (t_between_frames)))
-    log10D_high = np.log10((um_per_pxl * link_max) ** 2 / (4 * (t_between_frames)))
-    g = sns.histplot(
-        data=df_plot,
-        x="log10D (um^2/s)",
-        fill=True,
-        stat="count",
-        alpha=0.7,
-        color="dimgray",
-        bins=30,
-        binrange=(log10D_low, log10D_high),
-    )
-    plt.xlim(log10D_low, log10D_high)
-    Gauss_fit_plot_text(
-        data=df_plot["log10D (um^2/s)"],
-        range=(log10D_low, log10D_high),
-        color="firebrick",
-        text_x=0.815,
-        text_y=0.825,
-    )
-else:
-    g = sns.histplot(
-        data=df_plot,
-        x="log10D (um^2/s)",
-        fill=True,
-        stat="count",
-        alpha=0.7,
-        color="dimgray",
-        bins=30,
-    )
-    data = df_plot["log10D (um^2/s)"]
-    Gauss_fit_plot_text(data, None, "firebrick", 0.815, 0.825)
+static_err = 0.016
+um_per_pxl = 0.117
+link_max = 3
+log10D_low = np.log10(static_err ** 2 / (4 * (t_between_frames)))
+log10D_high = np.log10((um_per_pxl * link_max) ** 2 / (4 * (t_between_frames)))
+g = sns.histplot(
+    data=df_plot,
+    x="log10D (um^2/s)",
+    fill=True,
+    stat="count",
+    alpha=0.7,
+    color="dimgray",
+    bins=30,
+    binrange=(log10D_low - 1.5, log10D_high + 1.5),
+)
+plt.axvline(x=log10D_low, color="dimgray", ls=":")
+plt.axvline(x=log10D_high, color="dimgray", ls=":")
+plt.xlim(log10D_low - 1.5, log10D_high + 1.5)
+Gauss_fit_plot_text(
+    data=df_plot["log10D (um^2/s)"],
+    range=(log10D_low - 1.5, log10D_high + 1.5),
+    color="firebrick",
+    text_x=0.815,
+    text_y=0.825,
+)
 plt.title(title, fontsize=13, fontweight="bold")
 plt.xlabel("log10D ($\mu$m^2/s)", weight="bold")
 plt.tight_layout()
