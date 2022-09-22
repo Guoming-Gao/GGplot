@@ -128,8 +128,8 @@ g = sns.histplot(
     bins=40,
     binrange=(log10D_low - 1.5, log10D_high + 1.5),
 )
-plt.axvline(x=log10D_low, color="dimgray", ls=":")
-plt.axvline(x=log10D_high, color="dimgray", ls=":")
+plt.axvspan(log10D_low - 1.5, log10D_low, color="dimgray", alpha=0.3)
+plt.axvspan(log10D_high, log10D_high + 1.5, color="dimgray", alpha=0.3)
 plt.xlim(log10D_low - 1.5, log10D_high + 1.5)
 if DualFit:
     DualGauss_fit_plot_text(
