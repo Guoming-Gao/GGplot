@@ -28,11 +28,16 @@ def DualGauss(x, A1, x1, sigma1, A2, x2, sigma2):
 
 def DualGauss_fit_plot_text(data, range):
     counts, bins = np.histogram(data, bins=40, range=range)
+    lowerbound = range[0]
+    higherbound = range[1]
     (A1, x1, sigma1, A2, x2, sigma2), pcov = curve_fit(
         DualGauss,
         (bins[1:] + bins[:-1]) / 2,
         counts,
-        bounds=([0, -10, 0, 0, -10, 0], [len(data), 1, 5, len(data), 1, 5]),
+        bounds=(
+            [0, lowerbound, 0, 0, lowerbound, 0],
+            [counts.sum(), higherbound, 5, counts.sum(), higherbound, 5],
+        ),
     )
     err_A1, err_x1, err_sigma1, err_A2, err_x2, err_sigma2 = np.sqrt(np.diag(pcov))
     curve_x = np.arange(bins[0], bins[-1], 0.01)
@@ -119,7 +124,8 @@ counts, bins = np.histogram(
         [counts.sum(), log10D_high, 5, counts.sum(), log10D_high, 5],
     ),
 )
-if abs(x1 - x2) > 0.5:
+err_A1, err_x1, err_sigma1, err_A2, err_x2, err_sigma2 = np.sqrt(np.diag(pcov))
+if (abs(x1 - x2) > 0.5) & (max(err_x1, err_x2) < 5):
     DualFit = True
 else:
     DualFit = False
