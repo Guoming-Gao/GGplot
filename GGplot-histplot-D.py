@@ -49,7 +49,7 @@ def DualGauss_fit_plot_text(data, range):
     plt.text(
         0.7,
         0.83,
-        "log$_10$D$_1$ = " + str(round(x1, 2)) + "$\pm$" + str(round(err_x1, 2)),
+        r"log$_{10}$D$_1$ = " + str(round(x1, 2)) + "$\pm$" + str(round(err_x1, 2)),
         weight="bold",
         fontsize=15,
         color=sns.color_palette()[0],
@@ -58,7 +58,7 @@ def DualGauss_fit_plot_text(data, range):
     plt.text(
         0.7,
         0.75,
-        "log$_10$D$_2$ = " + str(round(x2, 2)) + "$\pm$" + str(round(err_x2, 2)),
+        r"log$_{10}$D$_2$ = " + str(round(x2, 2)) + "$\pm$" + str(round(err_x2, 2)),
         weight="bold",
         fontsize=15,
         color=sns.color_palette()[3],
@@ -80,7 +80,7 @@ def Gauss_fit_plot_text(data, range):
     plt.text(
         0.7,
         0.83,
-        "log$_10$D = " + str(round(x0, 2)) + "$\pm$" + str(round(err_x0, 2)),
+        r"log$_{10}$D = " + str(round(x0, 2)) + "$\pm$" + str(round(err_x0, 2)),
         weight="bold",
         fontsize=15,
         color=sns.color_palette()[3],
@@ -148,7 +148,7 @@ else:
         data=df_plot["log10D (um^2/s)"], range=(log10D_low - 1.5, log10D_high + 1.5),
     )
 plt.title(title, fontsize=13, fontweight="bold")
-plt.xlabel("log$_10$D ($\mu$m^2/s)", weight="bold")
+plt.xlabel("log$_{10}$D ($\mu$m^2/s)", weight="bold")
 plt.tight_layout()
 fsave = join(dirname(lst_files[0]), title + ".png")
 plt.savefig(fsave, format="png")
