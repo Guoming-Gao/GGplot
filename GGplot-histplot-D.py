@@ -114,7 +114,10 @@ counts, bins = np.histogram(
     DualGauss,
     (bins[1:] + bins[:-1]) / 2,
     counts,
-    bounds=([0, -10, 0, 0, -10, 0], [counts.sum(), 1, 5, counts.sum(), 1, 5]),
+    bounds=(
+        [0, log10D_low, 0, 0, log10D_low, 0],
+        [counts.sum(), log10D_high, 5, counts.sum(), log10D_high, 5],
+    ),
 )
 if abs(x1 - x2) > 0.5:
     DualFit = True
