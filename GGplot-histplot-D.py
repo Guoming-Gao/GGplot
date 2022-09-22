@@ -42,9 +42,9 @@ def DualGauss_fit_plot_text(data, range):
     curve_y1 = Gauss(curve_x, A1, x1, sigma1)
     curve_y2 = Gauss(curve_x, A2, x2, sigma2)
     plt.plot(curve_x, curve_ydual, color="dimgray", linewidth=2)
-    plt.plot(curve_x, curve_y1, color=sns.color_palette()[1], linewidth=2)
+    plt.plot(curve_x, curve_y1, color=sns.color_palette()[0], linewidth=2)
     plt.plot(curve_x, curve_y2, color=sns.color_palette()[3], linewidth=2)
-    plt.axvline(x=x1, color=sns.color_palette()[1], ls="--")
+    plt.axvline(x=x1, color=sns.color_palette()[0], ls="--")
     plt.axvline(x=x2, color=sns.color_palette()[3], ls="--")
 
     # label with text
@@ -54,7 +54,7 @@ def DualGauss_fit_plot_text(data, range):
         "log10D$_1$ = " + str(round(x1, 2)) + "$\pm$" + str(round(err_x1, 2)),
         weight="bold",
         fontsize=15,
-        color=sns.color_palette()[1],
+        color=sns.color_palette()[0],
         transform=plt.gcf().transFigure,
     )
     plt.text(
