@@ -78,7 +78,7 @@ def Gauss_fit_plot_text(data, range):
 
     # label with text
     plt.text(
-        0.76,
+        0.7,
         0.83,
         "log$_10$D = " + str(round(x0, 2)) + "$\pm$" + str(round(err_x0, 2)),
         weight="bold",
