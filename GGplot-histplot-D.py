@@ -1,5 +1,5 @@
 from tkinter import filedialog as fd
-from os.path import join, dirname
+from os.path import join, dirname, basename
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -8,14 +8,12 @@ from scipy.optimize import curve_fit
 
 sns.set(color_codes=True, style="white")
 
-print("Type in the title:")
-title = input()
-
 print("Type in the time between frames (seconds):")
 t_between_frames = float(input())
 
 print("Choose the D files to plot:")
 lst_files = list(fd.askopenfilenames())
+title = basename(lst_files[0]).split("-FOV")[0]
 
 
 def Gauss(x, A, x0, sigma):
@@ -150,7 +148,7 @@ else:
         data=df_plot["log10D (um^2/s)"], range=(log10D_low - 1.5, log10D_high + 1.5),
     )
 plt.title(title, fontsize=13, fontweight="bold")
-plt.xlabel("log10D ($\mu$m^2/s)", weight="bold")
+plt.xlabel("log$_10$D ($\mu$m^2/s)", weight="bold")
 plt.tight_layout()
 fsave = join(dirname(lst_files[0]), title + ".png")
 plt.savefig(fsave, format="png")
