@@ -46,7 +46,7 @@ def DualGauss_fit_plot_text(data, range):
 
     # label with text
     plt.text(
-        0.76,
+        0.7,
         0.83,
         "log10D$_1$ = " + str(round(x1, 2)) + "$\pm$" + str(round(err_x1, 2)),
         weight="bold",
@@ -55,7 +55,7 @@ def DualGauss_fit_plot_text(data, range):
         transform=plt.gcf().transFigure,
     )
     plt.text(
-        0.76,
+        0.7,
         0.75,
         "log10D$_2$ = " + str(round(x2, 2)) + "$\pm$" + str(round(err_x2, 2)),
         weight="bold",
@@ -128,8 +128,12 @@ g = sns.histplot(
     bins=40,
     binrange=(log10D_low - 1.5, log10D_high + 1.5),
 )
-plt.axvspan(log10D_low - 1.5, log10D_low, color="dimgray", alpha=0.3)
-plt.axvspan(log10D_high, log10D_high + 1.5, color="dimgray", alpha=0.3)
+plt.axvspan(
+    log10D_low - 1.5, log10D_low, facecolor="dimgray", alpha=0.2, edgecolor="none"
+)
+plt.axvspan(
+    log10D_high, log10D_high + 1.5, facecolor="dimgray", alpha=0.2, edgecolor="none"
+)
 plt.xlim(log10D_low - 1.5, log10D_high + 1.5)
 if DualFit:
     DualGauss_fit_plot_text(
