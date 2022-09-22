@@ -49,7 +49,7 @@ def DualGauss_fit_plot_text(data, range):
     plt.text(
         0.7,
         0.83,
-        "log10D$_1$ = " + str(round(x1, 2)) + "$\pm$" + str(round(err_x1, 2)),
+        "log$_10$D$_1$ = " + str(round(x1, 2)) + "$\pm$" + str(round(err_x1, 2)),
         weight="bold",
         fontsize=15,
         color=sns.color_palette()[0],
@@ -58,7 +58,7 @@ def DualGauss_fit_plot_text(data, range):
     plt.text(
         0.7,
         0.75,
-        "log10D$_2$ = " + str(round(x2, 2)) + "$\pm$" + str(round(err_x2, 2)),
+        "log$_10$D$_2$ = " + str(round(x2, 2)) + "$\pm$" + str(round(err_x2, 2)),
         weight="bold",
         fontsize=15,
         color=sns.color_palette()[3],
@@ -80,7 +80,7 @@ def Gauss_fit_plot_text(data, range):
     plt.text(
         0.76,
         0.83,
-        "$\mu$ = " + str(round(x0, 2)) + "$\pm$" + str(round(err_x0, 2)),
+        "log$_10$D = " + str(round(x0, 2)) + "$\pm$" + str(round(err_x0, 2)),
         weight="bold",
         fontsize=15,
         color=sns.color_palette()[3],
