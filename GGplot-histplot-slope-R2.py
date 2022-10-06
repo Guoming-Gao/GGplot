@@ -1,4 +1,6 @@
 import os
+from os.path import dirname
+from tkinter import filedialog as fd
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
@@ -9,13 +11,16 @@ sns.set(color_codes=True, style="white")
 
 ###############################################
 # Loading Data
-folderpath = "/Volumes/AnalysisGG/PROCESSED_DATA/Static-RNA-Control/StaticPercentEstimate/example-FUSinCondensate/"
+
+print("Type in Dataset Name:")
+dataset_name = input()
+
+print("Choose the D files to plot:")
+lst_files = list(fd.askopenfilenames())
+
+print("Choose folder path to save:")
+folderpath = fd.askdirectory()
 os.chdir(folderpath)
-lst_files = [
-    f
-    for f in os.listdir(folderpath)
-    if f.endswith("linregress_D.csv") & f.startswith("low")
-]
 
 lst_slope = []
 lst_R2 = []
@@ -37,7 +42,7 @@ plt.title(r"MSD-$\tau$ Fitting Slope", weight="bold")
 plt.xlabel("slope ('$\mu$m^2/s')", weight="bold")
 plt.ylabel("Counts", weight="bold")
 plt.tight_layout()
-plt.savefig("MSD-tau Fitting Slope.png", format="png")
+plt.savefig(dataset_name + "_MSD-tau Fitting Slope.png", format="png")
 
 
 plt.figure(figsize=(9, 4), dpi=200)
@@ -47,4 +52,4 @@ plt.title(r"MSD-$\tau$ Fitting R$^2$", weight="bold")
 plt.xlabel("R$^2$", weight="bold")
 plt.ylabel("Counts", weight="bold")
 plt.tight_layout()
-plt.savefig("MSD-tau Fitting R2.png", format="png")
+plt.savefig(dataset_name + "_MSD-tau Fitting R2.png", format="png")

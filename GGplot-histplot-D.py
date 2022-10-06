@@ -8,12 +8,18 @@ from scipy.optimize import curve_fit
 
 sns.set(color_codes=True, style="white")
 
+print("Type in title:")
+title = input()
+
 print("Type in the time between frames (seconds):")
 t_between_frames = float(input())
 
 print("Choose the D files to plot:")
 lst_files = list(fd.askopenfilenames())
-title = basename(lst_files[0]).split("-FOV")[0]
+
+print("Choose folder path to save:")
+folderpath = fd.askdirectory()
+os.chdir(folderpath)
 
 
 def Gauss(x, A, x0, sigma):
@@ -159,5 +165,5 @@ else:
 plt.title(title, fontsize=13, fontweight="bold")
 plt.xlabel("log$_{10}$D ($\mu$m^2/s)", weight="bold")
 plt.tight_layout()
-fsave = join(dirname(lst_files[0]), title + ".png")
+fsave = join(folderpath, title + ".png")
 plt.savefig(fsave, format="png")
