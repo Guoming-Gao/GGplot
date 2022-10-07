@@ -18,11 +18,11 @@ t_between_frames = float(input())
 print("Choose the D files to plot:")
 lst_files = list(fd.askopenfilenames())
 
-# print("Choose folder path to save:")
-# folderpath = fd.askdirectory()
-# os.chdir(folderpath)
-folderpath = "/Volumes/AnalysisGG/PROCESSED_DATA/RNA-diffusion-in-FUS/bioFUStether-10FUS-1Mg-10Dex-RT/NoTotalRNA"
+print("Choose folder path to save:")
+folderpath = fd.askdirectory()
 os.chdir(folderpath)
+# folderpath = "/Volumes/AnalysisGG/PROCESSED_DATA/RNA-diffusion-in-FUS/bioFUStether-10FUS-1Mg-10Dex-RT/NoTotalRNA"
+# os.chdir(folderpath)
 
 # calculate error bounds
 static_err = 0.016
