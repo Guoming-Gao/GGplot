@@ -1,5 +1,6 @@
 from tkinter import filedialog as fd
 from os.path import join, dirname, basename
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
