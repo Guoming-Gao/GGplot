@@ -9,6 +9,7 @@ from scipy.optimize import curve_fit
 
 sns.set(color_codes=True, style="white")
 
+N_bootstrap = 5
 print("Type in title:")
 title = input()
 
@@ -43,7 +44,7 @@ for file in lst_files:
 dataset_size = len(lst_log10D)
 lst_replicates = [
     np.random.choice(lst_log10D, round(len(lst_log10D) * 0.5), replace=False)
-    for i in range(3)
+    for i in range(N_bootstrap)
 ]
 
 lst_density = []
