@@ -12,8 +12,8 @@ sns.set(color_codes=True, style="white")
 file = "/Volumes/AnalysisGG/PROCESSED_DATA/CondensateAnalysis/Dcp1a-2x-2s/20221015-UGD-100msexposure-2sperframe-FOV-1.csv"
 
 df = pd.read_csv(file)
-lst_meanInt = df.amp
-lst_estD = df.sig
+lst_meanInt = df.height
+lst_estD = df.sigma
 lst_t = df.t
 # for file in lst_files:
 # timetag = basename(file).strip(".csv").split("_")[-1]
@@ -34,9 +34,9 @@ for t in timepoints:
     )
     lst_estD_prob.append(estD_density * (5 - 2) / 10)
     meanInt_density, meanInt_bins = np.histogram(
-        current_frame["meanInt"], bins=10, range=(400, 1200), density=True
+        current_frame["meanInt"], bins=10, range=(100, 800), density=True
     )
-    lst_meanInt_prob.append(meanInt_density * (1200 - 400) / 10)
+    lst_meanInt_prob.append(meanInt_density * (800 - 100) / 10)
 
 
 array_meanInt_prob = np.stack(lst_meanInt_prob)
@@ -45,6 +45,9 @@ df_array = pd.DataFrame(
     columns=[round(x) for x in timepoints],
     index=[round(x) for x in (meanInt_bins[1:] + meanInt_bins[:-1]) / 2],
 )
+df_array = df_array / df_array.max()
+
+
 plt.figure(1)
 ax = sns.heatmap(df_array, robust=True)
 ax.invert_yaxis()
